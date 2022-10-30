@@ -5,7 +5,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mysql2_1 = __importDefault(require("mysql2"));
 const config_1 = __importDefault(require("../utils/config"));
-const connection = mysql2_1.default.createConnection(Object.assign(Object.assign({}, config_1.default.db), { multipleStatements: true }));
+const { db } = config_1.default;
+const connection = mysql2_1.default.createConnection(Object.assign(Object.assign({}, db), { multipleStatements: true }));
 connection.query(`CREATE TABLE IF NOT EXISTS users 
     (pkey SERIAL PRIMARY KEY, id VARCHAR(128) UNIQUE, password VARCHAR(72), created_time DATETIME DEFAULT NOW());`);
 connection.query(`CREATE TABLE IF NOT EXISTS tokens (token VARCHAR(256), expiration DATETIME)`);

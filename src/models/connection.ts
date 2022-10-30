@@ -2,8 +2,10 @@ import mysql from "mysql2";
 
 import config from "../utils/config";
 
+const { db } = config; 
+
 const connection = mysql.createConnection({
-  ...config.db,
+  ...db,
   multipleStatements: true,
 });
 

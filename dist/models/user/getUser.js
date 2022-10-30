@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const connection_1 = __importDefault(require("../connection"));
-const createUser = (id, password) => new Promise((resolve, reject) => {
-    connection_1.default.query("INSERT INTO users (id, password) VALUES (?, ?) ", [id, password], (error, results) => error ? reject(error) : resolve(results));
+const getUser = (id) => new Promise((resolve, reject) => {
+    connection_1.default.query("SELECT * FROM users WHERE id = ?", [id], (error, results) => error ? reject(error) : resolve(results));
 });
-exports.default = createUser;
+exports.default = getUser;
