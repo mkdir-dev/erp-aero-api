@@ -6,9 +6,9 @@ export default {
   port: Number(process.env.PORT) || 3000,
   
   secretKey: String(process.env.JWT_SECRET) || "super_secret_key",
-  secretKeyLife: Number(process.env.JWT_SECRET_LIFE) || 3000,
+  secretKeyLife: String(process.env.JWT_SECRET_LIFE) || '10m',
   refreshSecretKey: String(process.env.REFRESH_SECRET) || "refresh_super_secret_key",
-  refreshSecretKeyLife: Number(process.env.REFRESH_SECRET_LIFE) || 86400,
+  refreshSecretKeyLife: String(process.env.REFRESH_SECRET_LIFE) || '10h',
 
   db: {
     host: String(process.env.DB_HOST) || "localhost",

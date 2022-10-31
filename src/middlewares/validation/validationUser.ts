@@ -5,7 +5,7 @@ const validationUser = (body: { id: string, password: string }): boolean => {
     id: Joi.alternatives(
       Joi.string().email().min(8).max(80).required(),
       Joi.string()
-        .regex(/^(\+?\d{7,15})\b$/)
+        .regex(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/)
         .required()
     ).required(),
     password: Joi.string().regex(/(?=.*[a-z])/).min(8).required()

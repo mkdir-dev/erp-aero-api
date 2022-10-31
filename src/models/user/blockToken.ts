@@ -6,10 +6,12 @@ const blockToken = (token: string, date: Date) => new Promise((
   resolve: (value: unknown) => void,
   reject: (reason?: any) => void
 ) => {
+  const expiration = date;
+
   connection.query(
     `DELETE FROM tokens WHERE expiration < NOW();
     INSERT INTO tokens (token, expiration) VALUES (?, ?)`,
-    [token, date],
+    [token, expiration],
     (
       error: Query.QueryError | null,
       results: RowDataPacket[] | RowDataPacket[][] | OkPacket | OkPacket[] | ResultSetHeader
