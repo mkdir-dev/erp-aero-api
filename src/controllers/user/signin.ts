@@ -21,7 +21,7 @@ const {
 } = config;
 
 const { SUCCESS_OK, ERROR_CODE, ERROR_NOT_FOUND, ERROR_SERVER } = statuses;
-const { ValidationErrMessages, NotFoundErrMessages } = userErr;
+const { ValidationSignInErrMessages, NotFoundErrMessages } = userErr;
 const { ServerErrMessages } = serverErr;
 
 const signin = async (req: Request, res: Response, next: NextFunction) => {
@@ -29,7 +29,7 @@ const signin = async (req: Request, res: Response, next: NextFunction) => {
   const result = validateUser(req.body);
 
   if (!result) {
-    res.status(ERROR_CODE).send({ message: ValidationErrMessages });
+    res.status(ERROR_CODE).send({ message: ValidationSignInErrMessages });
   }
 
   await getUser(id)

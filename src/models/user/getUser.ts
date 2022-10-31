@@ -3,8 +3,6 @@ import Query from "mysql2/typings/mysql/lib/protocol/sequences/Query";
 
 import connection from "../connection";
 
-// import { IUser } from '../../interfaces/users/interfaces-users';
-
 const getUser = (id: string) => new Promise((
   resolve: (value: unknown) => void,
   reject: (reason?: any) => void
@@ -21,9 +19,3 @@ const getUser = (id: string) => new Promise((
 });
 
 export default getUser;
-
-/*
-// results.length > 0
-      
-      // error ? reject(error) : resolve(results)
-*/

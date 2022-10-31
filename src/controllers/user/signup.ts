@@ -8,7 +8,7 @@ import { statuses } from '../../errors/errorStatuses';
 import { userErr, serverErr } from '../../errors/errorMessages';
 
 const { SUCCESS_OK, ERROR_CODE, ERROR_CONFLICT, ERROR_SERVER } = statuses;
-const { ValidationErrMessages, ConflictErrMessages } = userErr;
+const { ValidationSignUpErrMessages, ConflictErrMessages } = userErr;
 const { InternalServerErrMessages } = serverErr;
 
 const signup = async (req: Request, res: Response, next: NextFunction) => {
@@ -16,7 +16,7 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
   const result = validateUser(req.body);
 
   if (!result) {
-    res.status(ERROR_CODE).send({ message: ValidationErrMessages });
+    res.status(ERROR_CODE).send({ message: ValidationSignUpErrMessages });
   }
 
   await bcrypt.hash(password, 10)

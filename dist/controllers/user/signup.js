@@ -18,13 +18,13 @@ const validationUser_1 = __importDefault(require("../../middlewares/validation/v
 const errorStatuses_1 = require("../../errors/errorStatuses");
 const errorMessages_1 = require("../../errors/errorMessages");
 const { SUCCESS_OK, ERROR_CODE, ERROR_CONFLICT, ERROR_SERVER } = errorStatuses_1.statuses;
-const { ValidationErrMessages, ConflictErrMessages } = errorMessages_1.userErr;
+const { ValidationSignUpErrMessages, ConflictErrMessages } = errorMessages_1.userErr;
 const { InternalServerErrMessages } = errorMessages_1.serverErr;
 const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { id, password } = req.body;
     const result = (0, validationUser_1.default)(req.body);
     if (!result) {
-        res.status(ERROR_CODE).send({ message: ValidationErrMessages });
+        res.status(ERROR_CODE).send({ message: ValidationSignUpErrMessages });
     }
     yield bcryptjs_1.default.hash(password, 10)
         .then((hash) => __awaiter(void 0, void 0, void 0, function* () {

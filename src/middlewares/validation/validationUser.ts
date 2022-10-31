@@ -1,6 +1,6 @@
 import { Joi } from 'celebrate';
 
-const validationUser = (body: unknown): boolean => {
+const validationUser = (body: { id: string, password: string }): boolean => {
   const { error } = Joi.object({
     id: Joi.alternatives(
       Joi.string().email().min(8).max(80).required(),

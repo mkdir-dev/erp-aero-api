@@ -1,6 +1,8 @@
 export interface IUserErrMessages {
   BadRequestErrMessages: string,
-  ValidationErrMessages: string,
+  ValidationSignUpErrMessages: string,
+  ValidationSignInErrMessages: string,
+  ValidationTokenErrMessages: string,
   NotFoundErrMessages: string,
   ConflictErrMessages: string,
 }
