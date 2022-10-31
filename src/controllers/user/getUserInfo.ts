@@ -14,7 +14,7 @@ const { NotFoundErrMessages } = userErr;
 
 const getUserInfo = async (req: Request, res: Response, next: NextFunction) => {
   const { authorization } = req.headers;
-  const id = (req as unknown as { user: string }).user;
+  const { id } = (req as unknown as { user: { id: string; }}).user;
   const token = authorization ? authorization.replace('Bearer ', '') : '';
   const { check } = await checkToken({ token });
 

@@ -5,6 +5,8 @@ import checkToken from '../utils/checkToken';
 import { statuses } from '../errors/errorStatuses';
 import { authErr } from '../errors/errorMessages';
 
+import { IPayload } from '../interfaces/users/interfaces-users';
+
 const { ERROR_AUTH } = statuses;
 const { AuthRequiredErrMessages } = authErr;
 
@@ -17,14 +19,15 @@ const auth = async (req: Request, res: Response, next: NextFunction) => {
 
   const token = authorization ? authorization.replace('Bearer ', '') : '';
 
-  const { check, id } = await checkToken({ token });
+  const payload = await checkToken({ token });
 
-  if (!check) {
+  if (!payload.check) {
     res.status(ERROR_AUTH).send({ message: AuthRequiredErrMessages })
   }
 
-  if (id) {
-    (req as unknown as { user: string }).user = id;
+  if (payload.id && payload.exp) {
+    (req as unknown as { user: { id: string; exp: number }}).user =
+      { id: payload.id, exp: payload.exp ? payload.exp : 0 };
   } else {
     res.status(ERROR_AUTH).send({ message: AuthRequiredErrMessages })
   }

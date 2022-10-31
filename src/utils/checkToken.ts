@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 
 import config from './config';
 
-import { ICheckToken } from '../interfaces/users/interfaces-users';
+import { ICheckToken, IPayload } from '../interfaces/users/interfaces-users';
 
 const {
   secretKey,
@@ -10,16 +10,26 @@ const {
 } = config;
 
 const checkToken = async (data: ICheckToken):
-  Promise<{ check: boolean; id: string | null }> => {
+  Promise<IPayload> => {
   const { refresh, token } = data;
 
   try {
     const key = refresh ? refreshSecretKey : secretKey
     const payload = jwt.verify(token, key);
 
-    return { check: true, id: (payload as { id: string }).id};
+    return {
+      check: true,
+      id: (payload as IPayload).id,
+      iat: (payload as IPayload).iat,
+      exp: (payload as IPayload).exp,
+    };
   } catch (err) {
-    return { check: false, id: null};
+    return {
+      check: false,
+      id: null,
+      iat: null,
+      exp: null,
+    };
   }
 };
 

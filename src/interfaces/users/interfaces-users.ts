@@ -9,3 +9,10 @@ export interface ICheckToken {
   refresh?: boolean,
   token: string,
 }
+
+export interface IPayload {
+  check: boolean;
+  id: string | null,
+  iat: number | null,
+  exp: number | null,
+}
