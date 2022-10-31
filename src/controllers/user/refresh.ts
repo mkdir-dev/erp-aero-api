@@ -1,9 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 
-import validationToken from '../../middlewares/validation/validationToken';
+import { validationRefreshToken } from '../../middlewares/validation/validationToken';
 
 import createToken from '../../utils/createToken';
-import checkRefreshToken from '../../utils/checkRefreshToken';
+import checkToken from '../../utils/checkToken';
 import config from '../../utils/config';
 
 import { statuses } from '../../errors/errorStatuses';
@@ -22,13 +22,16 @@ const { AuthRequiredErrMessages } = authErr;
 
 const refresh = async (req: Request, res: Response, next: NextFunction) => {
   const { refresh_token } = req.body;
-  const result = validationToken(req.body);
+  const result = validationRefreshToken(refresh_token);
 
   if (!result) {
     res.status(ERROR_CODE).send({ message: ValidationTokenErrMessages });
   }
 
-  const { check, id } = await checkRefreshToken(refresh_token);
+  const { check, id } = await checkToken({
+    refresh: true,
+    token: refresh_token,
+  });
 
   if (check && !!id) {
     const success_token: string = createToken(id, secretKey, secretKeyLife);

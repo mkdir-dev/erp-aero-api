@@ -4,3 +4,8 @@ export interface IUser {
   pkey?: number;
   created_time?: Date;
 };
+
+export interface ICheckToken {
+  refresh?: boolean,
+  token: string,
+}
